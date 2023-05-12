@@ -18,7 +18,7 @@ local     volume-log
 local     volume-web
 ```
 ```
-docker run -dt -p 80:80 -p 3000:3000 nginx/test --mount source=volume-log,destination=/var/log/nginx --mount source=volume-web,destination=/var/html/
+docker run -dt -p 80:80 -p 3000:3000 -v volume-log:/var/log/nginx -v volume-web:/var/html/ nginx/test
 ```
 ```
 docker ps -a
