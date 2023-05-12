@@ -53,3 +53,29 @@ a29cc9587af6: Mounted from library/nginx
 latest: digest: sha256:b18b8eab5004c6025b68b1577c0436573788fe894b584f060890a4a03d812ebe size: 3024
 ```
 https://hub.docker.com/r/hellolightsp/otus_hw13/tags
+
+
+```
+curl localhost:80
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading 80</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+
+
+root@neon-desktop:/test_vm/docker# curl localhost:3000
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading 3000</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+```
