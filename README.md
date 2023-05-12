@@ -20,12 +20,12 @@ nginx                    latest    448a08f1d2f9   8 days ago       142MB
 ```
 mkdir ./docker
 cd ./docker
+```
 [Dockerfile](https://github.com/hellolightSP/otus_HW13/blob/main/Dockerfile)
 [index3000.html](https://github.com/hellolightSP/otus_HW13/blob/main/index3000.html)
 [index80.html](https://github.com/hellolightSP/otus_HW13/blob/main/index80.html)
 [page1.conf](https://github.com/hellolightSP/otus_HW13/blob/main/page1.conf)
 [page2.conf](https://github.com/hellolightSP/otus_HW13/blob/main/page2.conf)
-```
 
 
 docker build -t nginx/test .
