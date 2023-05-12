@@ -17,7 +17,9 @@ DRIVER    VOLUME NAME
 local     volume-log
 local     volume-web
 ```
+```
 docker run -dt -p 80:80 -p 3000:3000 nginx/test --mount source=volume-log,destination=/var/log/nginx --mount source=volume-web,destination=/var/html/
+```
 ```
 docker ps -a
 CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS                        PORTS                                                                          NAMES
