@@ -3,12 +3,13 @@
 Docker, docker-compose, dockerfile
 
 **Цель**
+
 Разобраться с основами docker, с образом, эко системой docker в целом.
 
 
 **Выполнение домашнего задания:**
 
-Скачиваем образ докера
+- Скачиваем образ nginx
 ```
 docker pull nginx
 
@@ -16,7 +17,7 @@ docker images -a
 REPOSITORY               TAG       IMAGE ID       CREATED          SIZE
 nginx                    latest    448a08f1d2f9   8 days ago       142MB
 ```
-Создаем Dockerfile и необходимые файлы для nginx
+- Создаем Dockerfile и необходимые файлы для nginx
 ```
 mkdir ./docker
 cd ./docker
@@ -31,26 +32,58 @@ cd ./docker
 
 [page2.conf](https://github.com/hellolightSP/otus_HW13/blob/main/page2.conf)
 
-
+- Собираем образ
+```
 docker build -t nginx/test .
+```
 
-
+- Добавиляем 2 вольюма. Один для логов приложения, другой для web-страниц.
+```
 docker volume create volume-log
 docker volume create volume-web
-```
+
 docker volume ls
 DRIVER    VOLUME NAME
 local     volume-log
 local     volume-web
 ```
+
+- Запускаем контейнер из созданного образа
 ```
 docker run -dt -p 80:80 -p 3000:3000 -v volume-log:/var/log/nginx -v volume-web:/var/html/ nginx/test
-```
-```
+
 docker ps -a
 CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS                        PORTS                                                                          NAMES
 e74959cdf9df   nginx/test   "/docker-entrypoint.…"   1 minutes ago    Up 1 minutes                  0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   funny_saha
 ```
+
+- Проверяем доступность страниц на 80 и 3000 портах
+```
+root@neon-desktop:/test_vm/docker# curl localhost:80
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading 80</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+
+
+root@neon-desktop:/test_vm/docker# curl localhost:3000
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading 3000</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+```
+
+- Добавляем наш образ на dockerhub
 ```
 docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
@@ -80,30 +113,6 @@ a29cc9587af6: Mounted from library/nginx
 8553b91047da: Mounted from library/nginx 
 latest: digest: sha256:b18b8eab5004c6025b68b1577c0436573788fe894b584f060890a4a03d812ebe size: 3024
 ```
+
+- Образ доступен по ссылке
 https://hub.docker.com/r/hellolightsp/otus_hw13/tags
-
-
-```
-curl localhost:80
-<!DOCTYPE html>
-<html>
-<body>
-
-<h1>My First Heading 80</h1>
-<p>My first paragraph.</p>
-
-</body>
-</html>
-
-
-root@neon-desktop:/test_vm/docker# curl localhost:3000
-<!DOCTYPE html>
-<html>
-<body>
-
-<h1>My First Heading 3000</h1>
-<p>My first paragraph.</p>
-
-</body>
-</html>
-```
